@@ -14,7 +14,7 @@ arabic
 tags:
 knowledge, multilingual, multiple-choice
 
-paper: 
+paper: TBD
 """
 
 from lighteval.metrics.metrics import Metrics
