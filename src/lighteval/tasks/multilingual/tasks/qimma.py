@@ -73,6 +73,6 @@ SyntheticQA_Tasks = [CustomQimmaNativeTask(name=f"qimma-SyntheticQA:{subset}", h
 QIMMA_TASKS = QIMMA_TASKS + AraDiCE_Tasks + Arabculture_Tasks + MedArabiQ_Tasks + SyntheticQA_Tasks
 
 
-TASK_TABLE = [
-    QIMMA_TASKS,
-]
+TASKS_TABLE = (
+    QIMMA_TASKS
+)
