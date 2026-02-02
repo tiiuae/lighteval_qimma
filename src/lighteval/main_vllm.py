@@ -29,6 +29,7 @@ from lighteval.cli_args import (
     HELP_PANEL_NAME_4,
     custom_tasks,
     dataset_loading_processes,
+    load_tasks_multilingual,
     job_id,
     load_responses_from_details_date_id,
     max_samples,
@@ -97,7 +98,6 @@ def vllm(
         hub_results_org=results_org,
         use_wandb=wandb,
     )
-
     pipeline_params = PipelineParameters(
         launcher_type=ParallelismManager.VLLM,
         job_id=job_id,
