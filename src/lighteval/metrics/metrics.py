@@ -56,6 +56,7 @@ from lighteval.metrics.metrics_sample import (
     PassAtK,
     Recall,
     StringDistance,
+    BertArScore,
 )
 from lighteval.metrics.normalizations import bigbench_normalizer, remove_braces, remove_braces_and_strip
 from lighteval.metrics.sample_preparator import (
@@ -175,6 +176,13 @@ class Metrics(Enum):
     bert_score = SampleLevelMetricGrouping(
         metric_name=["BERTScore-P", "BERTScore-R", "BERTScore-F"],
         sample_level_fn=BertScore(normalize_gold=remove_braces, normalize_pred=remove_braces_and_strip),
+        category=SamplingMethod.GENERATIVE,
+        corpus_level_fn={"BERTScore-P": np.mean, "BERTScore-R": np.mean, "BERTScore-F": np.mean},
+        higher_is_better={"BERTScore-P": True, "BERTScore-R": True, "BERTScore-F": True},
+    )
+    bert_ar_score = SampleLevelMetricGrouping(
+        metric_name=["BERTScore-P", "BERTScore-R", "BERTScore-F"],
+        sample_level_fn=BertArScore(normalize_gold=remove_braces, normalize_pred=remove_braces_and_strip),
         category=SamplingMethod.GENERATIVE,
         corpus_level_fn={"BERTScore-P": np.mean, "BERTScore-R": np.mean, "BERTScore-F": np.mean},
         higher_is_better={"BERTScore-P": True, "BERTScore-R": True, "BERTScore-F": True},
