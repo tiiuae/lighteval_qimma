@@ -29,6 +29,7 @@ from lighteval.cli_args import (
     HELP_PANEL_NAME_4,
     custom_tasks,
     dataset_loading_processes,
+    load_tasks_multilingual,
     job_id,
     load_responses_from_details_date_id,
     max_samples,
@@ -58,6 +59,7 @@ def vllm(
     ] = None,
     dataset_loading_processes: dataset_loading_processes.type = dataset_loading_processes.default,
     custom_tasks: custom_tasks.type = custom_tasks.default,
+    load_tasks_multilingual: load_tasks_multilingual.type = load_tasks_multilingual.default,
     num_fewshot_seeds: num_fewshot_seeds.type = num_fewshot_seeds.default,
     load_responses_from_details_date_id: load_responses_from_details_date_id.type = load_responses_from_details_date_id.default,
     remove_reasoning_tags: remove_reasoning_tags.type = remove_reasoning_tags.default,
@@ -96,11 +98,11 @@ def vllm(
         hub_results_org=results_org,
         use_wandb=wandb,
     )
-
     pipeline_params = PipelineParameters(
         launcher_type=ParallelismManager.VLLM,
         job_id=job_id,
         dataset_loading_processes=dataset_loading_processes,
+        load_tasks_multilingual=load_tasks_multilingual,
         custom_tasks_directory=custom_tasks,
         num_fewshot_seeds=num_fewshot_seeds,
         max_samples=max_samples,

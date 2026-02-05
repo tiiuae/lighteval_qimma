@@ -1,0 +1,74 @@
+qimma-AraDiCE-Culture:Egypt
+qimma-AraDiCE-Culture:Jordan
+qimma-AraDiCE-Culture:Lebanon
+qimma-AraDiCE-Culture:Palestine
+qimma-AraDiCE-Culture:Qatar
+qimma-AraDiCE-Culture:Syria
+qimma-AraTrust
+qimma-ArabCulture:Algeria
+qimma-ArabCulture:Jordan
+qimma-ArabCulture:KSA
+qimma-ArabCulture:Lebanon
+qimma-ArabCulture:Libya
+qimma-ArabCulture:Morocco
+qimma-ArabCulture:Palestine
+qimma-ArabCulture:Sudan
+qimma-ArabCulture:Syria
+qimma-ArabCulture:Tunisia
+qimma-ArabCulture:UAE
+qimma-ArabCulture:Yemen
+qimma-MedArabiQ:fib_with_choices
+qimma-MedArabiQ:mcq_bias
+qimma-MedArabiQ:mcq_knowledge
+qimma-MizanQA
+qimma-NativeQA-RDP
+qimma-NativeQA
+qimma-PALMX-2025
+qimma-SyntheticQA:Biology
+qimma-SyntheticQA:Chemistry
+qimma-SyntheticQA:General_Science
+qimma-SyntheticQA:Math
+qimma-SyntheticQA:Physics
+qimma-AraDiCE-Culture:Egypt
+qimma-AraDiCE-Culture:Jordan
+qimma-AraDiCE-Culture:Lebanon
+qimma-ArabicMMLU:Arabic Language (Middle School)
+qimma-ArabicMMLU:Civics (High School)
+qimma-ArabicMMLU:Social Science (Middle School)
+qimma-ArabicMMLU:Economics (High School)
+qimma-ArabicMMLU:History (High School)
+qimma-ArabicMMLU:Political Science (University)
+qimma-ArabicMMLU:Geography (High School)
+qimma-ArabicMMLU:Islamic Studies (High School)
+qimma-ArabicMMLU:Arabic Language (Primary School)
+qimma-ArabicMMLU:Natural Science (Primary School)
+qimma-ArabicMMLU:Philosophy (High School)
+qimma-ArabicMMLU:General Knowledge
+qimma-ArabicMMLU:Arabic Language (High School)
+qimma-ArabicMMLU:Economics (University)
+qimma-ArabicMMLU:Islamic Studies (Primary School)
+qimma-ArabicMMLU:Geography (Middle School)
+qimma-ArabicMMLU:Islamic Studies
+qimma-ArabicMMLU:Biology (High School)
+qimma-ArabicMMLU:Natural Science (Middle School)
+qimma-ArabicMMLU:Islamic Studies (Middle School)
+qimma-ArabicMMLU:Math (Primary School)
+qimma-ArabicMMLU:Computer Science (Primary School)
+qimma-ArabicMMLU:Computer Science (High School)
+qimma-ArabicMMLU:Social Science (Primary School)
+qimma-ArabicMMLU:Arabic Language (Grammar)
+qimma-ArabicMMLU:Physics (High School)
+qimma-ArabicMMLU:History (Primary School)
+qimma-ArabicMMLU:Driving Test
+qimma-ArabicMMLU:Civics (Middle School)
+qimma-ArabicMMLU:History (Middle School)
+qimma-ArabicMMLU:General Knowledge (Middle School)
+qimma-ArabicMMLU:General Knowledge (Primary School)
+qimma-ArabicMMLU:Geography (Primary School)
+qimma-ArabicMMLU:Law (Professional)
+qimma-ArabicMMLU:Computer Science (University)
+qimma-ArabicMMLU:Accounting (University)
+qimma-ArabicMMLU:Economics (Middle School)
+qimma-ArabicMMLU:Management (University)
+qimma-ArabicMMLU:Computer Science (Middle School)
+qimma-ArabicMMLU:Arabic Language (General)
