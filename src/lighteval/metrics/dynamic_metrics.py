@@ -30,6 +30,7 @@ from lighteval.metrics.metrics_sample import (
     F1_score,
     LoglikelihoodAcc,
     NormalizedMultiChoiceProbability,
+    NormalizedMultiChoiceScore,
     Probability,
 )
 from lighteval.metrics.normalizations import (
@@ -66,6 +67,23 @@ class LogLikelihoodAccMetric(SampleLevelMetric):
             higher_is_better=True,
         )
 
+
+class NormalizedMultiChoiceScoreMetric(SampleLevelMetric):
+    def __init__(
+        self,
+        normalization: LogProbNormalization | None = None,
+        score_function: Callable[[np.ndarray], float] = np.max,
+    ):
+        """Create score-based mult-choice meteric based on custom score_function"""
+        super().__init__(
+            metric_name="normalized_score" + (f"_{normalization.name}" if normalization else ""),
+            sample_level_fn=NormalizedMultiChoiceScore(
+                log_prob_normalization=normalization, score_function=score_function
+            ),
+            category=SamplingMethod.LOGPROBS,
+            corpus_level_fn=np.mean,
+            higher_is_better=True,
+        )
 
 class NormalizedMultiChoiceProbMetric(SampleLevelMetric):
     def __init__(
