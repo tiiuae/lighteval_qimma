@@ -658,6 +658,68 @@ class BertScore(SampleLevelComputation):
         return {"BERTScore-P": p[0].item(), "BERTScore-R": r[0].item(), "BERTScore-F": f[0].item()}
 
 
+class BertArScore(SampleLevelComputation):
+    def __init__(
+        self,
+        normalize_gold: Callable | None = None,
+        normalize_pred: Callable | None = None,
+    ):
+        r"""A BERT scorer class focused on arabic text. Relies on some called extracted from `bert-score`. By default, will use the
+        `aubmindlab/bert-large-arabertv2` as scorer. For each tokenized (pred, target) pair, it computes Precision,
+        Recall and F1 as following:
+
+            Precision = \sum_{t=1}^{len(pred)} \div{max(Cos.Sim.(pred_t, target))}{IDF(pred_t)}
+
+            Recall = \sum_{t=1}^{len(target)} \div{max(Cos.Sim.(target_t, pred))}{IDF(target_t)}
+
+            F1 = \div{Precision * Recall}{Precision + Recall}
+
+        in which `Cos.Sim.` is the Cosine Similarity metric and `IDF(.)` represents the Inverse Document
+        Frequency of its input token. It defaults to 1 for all tokens and 0 for EOS and SEP tokens.
+
+        Args:
+            normalize_gold (callable, optional): Function to use to normalize the reference strings.
+                Defaults to None if no normalization is applied.
+            normalize_pred (callable, optional): Function to use to normalize the predicted strings.
+                Defaults to None if no normalization is applied.
+        """
+        self.bert_scorer = None
+
+        self.normalize_gold = normalize_gold
+        self.normalize_pred = normalize_pred
+
+    def compute(self, doc: Doc, model_response: ModelResponse, **kwargs) -> dict[str, float]:
+        """Computes the prediction, recall and f1 score using the bert scorer.
+
+        Args:
+            doc (Doc): The document containing gold references.
+            model_response (ModelResponse): The model's response containing predictions.
+            **kwargs: Additional keyword arguments.
+
+        Returns:
+            dict: Scores over the current sample's items.
+        """
+        golds = doc.get_golds()
+        predictions = model_response.final_text
+
+        if self.bert_scorer is None:
+            logger.warning("The first metric computation step might be a bit longer as we need to download the model.")
+            # We only initialize on first compute
+            self.bert_scorer = BERTScorer(
+                model_type="aubmindlab/bert-large-arabertv2", lang="ar"
+            )
+        golds = as_list(golds)
+        predictions = as_list(predictions)
+        # Normalize
+        if self.normalize_gold:
+            golds = [self.normalize_gold(g) for g in golds]
+
+        if self.normalize_pred:
+            predictions = [self.normalize_pred(p) for p in predictions]
+
+        p, r, f = self.bert_scorer.score(predictions, golds)
+        return {"BERTScore-P": p[0].item(), "BERTScore-R": r[0].item(), "BERTScore-F": f[0].item()}
+
 class Extractiveness(SampleLevelComputation):
     def __init__(
         self,

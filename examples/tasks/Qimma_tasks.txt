@@ -72,3 +72,6 @@ qimma-ArabicMMLU:Economics (Middle School)
 qimma-ArabicMMLU:Management (University)
 qimma-ArabicMMLU:Computer Science (Middle School)
 qimma-ArabicMMLU:Arabic Language (General)
+qimma-Arablegal-QA
+qimma-MedArabicQ-QA:fib_no_choices
+qimma-MedArabicQ-QA:qa_with_llm_mods

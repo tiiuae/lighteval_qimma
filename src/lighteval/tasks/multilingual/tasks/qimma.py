@@ -80,7 +80,65 @@ SyntheticQA_Tasks = construct_tasks_from_subsets("qimma/MCQ_SyntheticQA", "Synth
 ArabicMMLU_subsets = ['Arabic Language (Middle School)', 'Civics (High School)', 'Social Science (Middle School)', 'Economics (High School)', 'History (High School)', 'Political Science (University)', 'Geography (High School)', 'Islamic Studies (High School)', 'Arabic Language (Primary School)', 'Natural Science (Primary School)', 'Philosophy (High School)', 'General Knowledge', 'Arabic Language (High School)', 'Economics (University)', 'Islamic Studies (Primary School)', 'Geography (Middle School)', 'Islamic Studies', 'Biology (High School)', 'Natural Science (Middle School)', 'Islamic Studies (Middle School)', 'Math (Primary School)', 'Computer Science (Primary School)', 'Computer Science (High School)', 'Social Science (Primary School)', 'Arabic Language (Grammar)', 'Physics (High School)', 'History (Primary School)', 'Driving Test', 'Civics (Middle School)', 'History (Middle School)', 'General Knowledge (Middle School)', 'General Knowledge (Primary School)', 'Geography (Primary School)', 'Law (Professional)', 'Computer Science (University)', 'Accounting (University)', 'Economics (Middle School)', 'Management (University)', 'Computer Science (Middle School)', 'Arabic Language (General)']
 ArabicMMLU_subsets = construct_tasks_from_subsets("qimma/MCQ_ArabicMMLU","ArabicMMLU", ArabicMMLU_subsets)
 
-QIMMA_TASKS = (
+
+#######################
+# QA TASKS
+#######################
+def qimma_qa_prompt(line, task_name: str = None):
+    return Doc(
+        task_name=task_name,
+        query=line['prompt'],
+        choices=[line["choices"]],
+        gold_index=0,
+        instruction=None,
+    )
+
+
+class CustomQimmaQATask(LightevalTaskConfig):
+    def __init__(
+        self,
+        name,
+        hf_repo,
+        hf_subset="default",
+        post_process_fn=None,
+        generation_size=512
+    ):
+        super().__init__(
+            name=name,
+            hf_subset=hf_subset,
+            hf_repo=hf_repo,
+            prompt_function=qimma_qa_prompt,
+            metrics=[
+                # Metrics.rouge1,
+                # Metrics.rouge2,
+                # Metrics.rougeL,
+                # Metrics.faithfulness,
+                # Metrics.extractiveness,
+                # Metrics.bert_score,
+                Metrics.bert_ar_score,
+                Metrics.bleu,
+                Metrics.chrf_plus,
+                # Metrics.bleurt,
+                # Metrics.chrf,
+                # Metritask_namecs.ter,
+            ],
+            hf_avail_splits=["test", "validation"],
+            evaluation_splits=["test"],
+            few_shots_split="validation",
+            few_shots_select="sequential",
+            generation_size=generation_size,
+            stop_sequence=["\n"],
+            version=0,
+        )
+
+
+arablegal_qa = [CustomQimmaQATask(name="qimma-Arablegal-QA", hf_repo="qimma/QA_ArabLegalEval")]
+
+medArabiQ_qa = [CustomQimmaQATask(name=f"qimma-MedArabicQ-QA:{sub}", hf_repo="qimma/QA_MedArabiQ", hf_subset=sub) for sub in ["fib_no_choices","qa_with_llm_mods"]]
+
+
+
+QIMMA_MCQ_TASKS = (
     QIMMA_TASKS
     + AraDiCE_Tasks
     + Arabculture_Tasks
@@ -89,7 +147,13 @@ QIMMA_TASKS = (
     + ArabicMMLU_subsets
 )
 
+QIMMA_QA_TASKS = (
+    arablegal_qa
+    + medArabiQ_qa
+)
+
 
 TASKS_TABLE = (
-    QIMMA_TASKS
+    QIMMA_MCQ_TASKS
+    +QIMMA_QA_TASKS
 )
