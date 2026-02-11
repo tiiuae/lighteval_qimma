@@ -20,7 +20,6 @@ qimma-ArabCulture:Yemen
 qimma-MedArabiQ:fib_with_choices
 qimma-MedArabiQ:mcq_bias
 qimma-MedArabiQ:mcq_knowledge
-qimma-MizanQA
 qimma-NativeQA-RDP
 qimma-NativeQA
 qimma-PALMX-2025
