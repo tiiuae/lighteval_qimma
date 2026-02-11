@@ -21,7 +21,18 @@ from lighteval.metrics.metrics import Metrics
 from lighteval.metrics.normalizations import LogProbCharNorm
 from lighteval.tasks.lighteval_task import LightevalTaskConfig
 from lighteval.tasks.requests import Doc
+from lighteval.metrics.dynamic_metrics import NormalizedMultiChoiceScoreMetric, NormalizedMultiChoiceProbMetric
+import numpy as np
 
+def multi_choice_scorer(gold_index, log_probs):
+    ## sort indexs based on log_prob in ascending manner
+    sort_args = np.argsort(log_probs)
+    i = len(log_probs) - len(gold_index)
+    # args with highest scores (represent top choices)
+    best_args = sort_args[i:]
+    best_args.sort()
+
+    return int(np.array_equal(sorted(gold_index), best_args))
 
 # fmt: off
 LETTER_INDICES_AR = ["أ", "ب", "ج", "د", "هـ", "و", "ز", "ح", "ط", "ي", "ك", "ل", "م", "ن", "س", "ع", "ف", "ص", "ق", "ر", "ش", "ت", "ث", "خ", "ذ", "ض", "ظ", "غ"]
@@ -42,13 +53,30 @@ class CustomQimmaNativeTask(LightevalTaskConfig):
         name,
         hf_subset,
         hf_repo,
+        multi_select = False
     ):
+        metrics = [Metrics.loglikelihood_acc(sample_params={"logprob_normalization": LogProbCharNorm()})]
+        if multi_select:
+            score_based_met = NormalizedMultiChoiceScoreMetric(
+                normalization = LogProbCharNorm(),
+                score_function= multi_choice_scorer
+
+            )
+
+            prob_based_met = NormalizedMultiChoiceProbMetric(
+                normalization = LogProbCharNorm(),
+                aggregation_function = np.sum
+
+            )
+
+            metrics = [score_based_met, prob_based_met]
+            
         super().__init__(
             name=name,
             hf_subset=hf_subset,
             hf_repo=hf_repo,
             prompt_function=qimma_pfn,
-            metrics=[Metrics.loglikelihood_acc(sample_params={"logprob_normalization": LogProbCharNorm()})],
+            metrics=metrics,
             hf_avail_splits=["test", "validation"],
             evaluation_splits=["test"],
             few_shots_split="validation",
@@ -62,8 +90,12 @@ def construct_tasks_from_subsets(hf_repo, benchmark, subsets):
     return [CustomQimmaNativeTask(name=f"qimma-{benchmark}:{subset}", hf_subset=subset, hf_repo=hf_repo) for subset in subsets]
 
 
-QIMMA_BENCHMARKS = ['AraTrust', 'MizanQA', 'NativeQA-RDP', 'NativeQA', 'PALMX-2025']
+QIMMA_BENCHMARKS = ['AraTrust', 'NativeQA-RDP', 'NativeQA', 'PALMX-2025']
 QIMMA_TASKS = [CustomQimmaNativeTask(name=f"qimma-{benchmark}", hf_subset="default", hf_repo=f"qimma/MCQ_{benchmark}") for benchmark in QIMMA_BENCHMARKS]
+
+mizan_task = CustomQimmaNativeTask(name=f"qimma-mizan", hf_subset="default", hf_repo=f"qimma/MCQ_MizanQA", multi_select=True)
+QIMMA_TASKS.append(mizan_task)
+
 
 AraDiCE_Subsets = ['Egypt', 'Jordan', 'Lebanon', 'Palestine', 'Qatar', 'Syria']
 AraDiCE_Tasks = construct_tasks_from_subsets("qimma/MCQ_AraDiCE-Culture","AraDiCE-Culture", AraDiCE_Subsets)

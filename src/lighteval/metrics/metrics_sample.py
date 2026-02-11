@@ -292,6 +292,63 @@ class LoglikelihoodAcc(SampleLevelComputation):
 
         best_choice = np.argmax(normalized_log_probs)
         return int(best_choice in gold_ixs)
+    
+
+
+class NormalizedMultiChoiceScore(SampleLevelComputation):
+    def __init__(
+        self,
+        log_prob_normalization: LogProbNormalization | None = None,
+        score_function: Callable[[np.ndarray, np.ndarray], float] = np.max,
+    ):
+        """Returns the score of multi-choice sample based on custom acc_function 
+
+        Args:
+            log_prob_normalization (LogProbNormalization | None): The normalization to apply.
+            score_function (Callable[[np.ndarray, np.ndarray], float]): The function to use that computes score based gold indices and Normalized Log-Prob.
+        """
+        self.log_prob_normalization = log_prob_normalization
+        self.score_function = score_function
+
+    def compute(
+        self,
+        doc: Doc,
+        model_response: ModelResponse,
+        **kwargs,
+    ) -> float:
+        """Computes the log likelihood probability: chance of choosing the best choice.
+
+        Args:
+            doc (Doc): The document containing choices and gold indices.
+            model_response (ModelResponse): The model's response containing logprobs.
+            **kwargs: Additional keyword arguments.
+
+        Returns:
+            float: return score based on the score function
+        """
+        n_choices = len(doc.choices)
+        choices_logprobs = model_response.logprobs[:n_choices]
+        unconditioned_logprobs = None
+
+        if len(model_response.logprobs) == n_choices * 2:
+            unconditioned_logprobs = model_response.logprobs[n_choices : n_choices * 2]
+
+        gold_ixs = as_list(doc.gold_index)
+        choices_tokens = model_response.output_tokens[:n_choices]
+
+        normalized_log_probs = (
+            normalize_log_probs(
+                self.log_prob_normalization,
+                choices_logprobs,
+                unconditioned_logprobs,
+                doc.choices,
+                choices_tokens,
+            )
+            if self.log_prob_normalization
+            else choices_logprobs
+        )
+        return self.score_function(gold_ixs, normalized_log_probs)
+
 
 
 class NormalizedMultiChoiceProbability(SampleLevelComputation):
