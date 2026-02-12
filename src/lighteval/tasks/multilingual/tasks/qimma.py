@@ -90,7 +90,7 @@ def construct_tasks_from_subsets(hf_repo, benchmark, subsets):
     return [CustomQimmaNativeTask(name=f"qimma-{benchmark}:{subset}", hf_subset=subset, hf_repo=hf_repo) for subset in subsets]
 
 
-QIMMA_BENCHMARKS = ['AraTrust', 'NativeQA-RDP', 'NativeQA', 'PALMX-2025']
+QIMMA_BENCHMARKS = ['AraTrust', 'NativeQA-RDP', 'NativeQA', 'PALMX-2025', 'ArabLegalEval']
 QIMMA_TASKS = [CustomQimmaNativeTask(name=f"qimma-{benchmark}", hf_subset="default", hf_repo=f"qimma/MCQ_{benchmark}") for benchmark in QIMMA_BENCHMARKS]
 
 mizan_task = CustomQimmaNativeTask(name=f"qimma-mizan", hf_subset="default", hf_repo=f"qimma/MCQ_MizanQA", multi_select=True)
