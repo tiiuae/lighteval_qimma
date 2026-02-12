@@ -20,9 +20,9 @@ qimma-ArabCulture:Yemen
 qimma-MedArabiQ:fib_with_choices
 qimma-MedArabiQ:mcq_bias
 qimma-MedArabiQ:mcq_knowledge
-qimma-NativeQA-RDP
 qimma-NativeQA
-qimma-PALMX-2025
+qimma-PalmX:culture
+qimma-PalmX:islamic
 qimma-SyntheticQA:Biology
 qimma-SyntheticQA:Chemistry
 qimma-SyntheticQA:General_Science
@@ -71,8 +71,7 @@ qimma-ArabicMMLU:Economics (Middle School)
 qimma-ArabicMMLU:Management (University)
 qimma-ArabicMMLU:Computer Science (Middle School)
 qimma-ArabicMMLU:Arabic Language (General)
-qimma-Arablegal-QA
+qimma-ArablegalEval-QA
 qimma-MedArabicQ-QA:fib_no_choices
 qimma-MedArabicQ-QA:qa_with_llm_mods
-qimma-mizan
-qimma-ArabLegalEval
+qimma-Mizan

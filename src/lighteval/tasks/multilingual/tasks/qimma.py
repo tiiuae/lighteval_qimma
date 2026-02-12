@@ -90,10 +90,10 @@ def construct_tasks_from_subsets(hf_repo, benchmark, subsets):
     return [CustomQimmaNativeTask(name=f"qimma-{benchmark}:{subset}", hf_subset=subset, hf_repo=hf_repo) for subset in subsets]
 
 
-QIMMA_BENCHMARKS = ['AraTrust', 'NativeQA-RDP', 'NativeQA', 'PALMX-2025', 'ArabLegalEval']
+QIMMA_BENCHMARKS = ['AraTrust', 'NativeQA']
 QIMMA_TASKS = [CustomQimmaNativeTask(name=f"qimma-{benchmark}", hf_subset="default", hf_repo=f"qimma/MCQ_{benchmark}") for benchmark in QIMMA_BENCHMARKS]
 
-mizan_task = CustomQimmaNativeTask(name=f"qimma-mizan", hf_subset="default", hf_repo=f"qimma/MCQ_MizanQA", multi_select=True)
+mizan_task = CustomQimmaNativeTask(name=f"qimma-Mizan", hf_subset="default", hf_repo=f"qimma/MCQ_MizanQA", multi_select=True)
 QIMMA_TASKS.append(mizan_task)
 
 
@@ -110,7 +110,11 @@ SyntheticQA_Subset = ['Biology', 'Chemistry', 'General_Science', 'Math', 'Physic
 SyntheticQA_Tasks = construct_tasks_from_subsets("qimma/MCQ_SyntheticQA", "SyntheticQA", SyntheticQA_Subset)
 
 ArabicMMLU_subsets = ['Arabic Language (Middle School)', 'Civics (High School)', 'Social Science (Middle School)', 'Economics (High School)', 'History (High School)', 'Political Science (University)', 'Geography (High School)', 'Islamic Studies (High School)', 'Arabic Language (Primary School)', 'Natural Science (Primary School)', 'Philosophy (High School)', 'General Knowledge', 'Arabic Language (High School)', 'Economics (University)', 'Islamic Studies (Primary School)', 'Geography (Middle School)', 'Islamic Studies', 'Biology (High School)', 'Natural Science (Middle School)', 'Islamic Studies (Middle School)', 'Math (Primary School)', 'Computer Science (Primary School)', 'Computer Science (High School)', 'Social Science (Primary School)', 'Arabic Language (Grammar)', 'Physics (High School)', 'History (Primary School)', 'Driving Test', 'Civics (Middle School)', 'History (Middle School)', 'General Knowledge (Middle School)', 'General Knowledge (Primary School)', 'Geography (Primary School)', 'Law (Professional)', 'Computer Science (University)', 'Accounting (University)', 'Economics (Middle School)', 'Management (University)', 'Computer Science (Middle School)', 'Arabic Language (General)']
-ArabicMMLU_subsets = construct_tasks_from_subsets("qimma/MCQ_ArabicMMLU","ArabicMMLU", ArabicMMLU_subsets)
+ArabicMMLU_Tasks = construct_tasks_from_subsets("qimma/MCQ_ArabicMMLU","ArabicMMLU", ArabicMMLU_subsets)
+
+
+PalmX_Subset = ['culture', 'islamic']
+PalmX_Tasks = construct_tasks_from_subsets("qimma/MCQ_PalmX", "PalmX", PalmX_Subset)
 
 
 #######################
@@ -164,10 +168,9 @@ class CustomQimmaQATask(LightevalTaskConfig):
         )
 
 
-arablegal_qa = [CustomQimmaQATask(name="qimma-Arablegal-QA", hf_repo="qimma/QA_ArabLegalEval")]
+arablegal_qa = [CustomQimmaQATask(name="qimma-ArablegalEval-QA", hf_repo="qimma/QA_ArabLegalEval")]
 
 medArabiQ_qa = [CustomQimmaQATask(name=f"qimma-MedArabicQ-QA:{sub}", hf_repo="qimma/QA_MedArabiQ", hf_subset=sub) for sub in ["fib_no_choices","qa_with_llm_mods"]]
-
 
 
 QIMMA_MCQ_TASKS = (
@@ -176,7 +179,8 @@ QIMMA_MCQ_TASKS = (
     + Arabculture_Tasks
     + MedArabiQ_Tasks
     + SyntheticQA_Tasks
-    + ArabicMMLU_subsets
+    + ArabicMMLU_Tasks
+    + PalmX_Tasks
 )
 
 QIMMA_QA_TASKS = (
