@@ -106,16 +106,21 @@ Arabculture_Tasks = construct_tasks_from_subsets("qimma/MCQ_ArabCulture","ArabCu
 MedArabiQ_Subsets = ['fib_with_choices', 'mcq_bias', 'mcq_knowledge']
 MedArabiQ_Tasks = construct_tasks_from_subsets("qimma/MCQ_MedArabiQ","MedArabiQ", MedArabiQ_Subsets)
 
-SyntheticQA_Subset = ['Biology', 'Chemistry', 'General_Science', 'Math', 'Physics']
-SyntheticQA_Tasks = construct_tasks_from_subsets("qimma/MCQ_SyntheticQA", "SyntheticQA", SyntheticQA_Subset)
+SyntheticQA_Subsets = ['Biology', 'Chemistry', 'General_Science', 'Math', 'Physics']
+SyntheticQA_Tasks = construct_tasks_from_subsets("qimma/MCQ_SyntheticQA", "SyntheticQA", SyntheticQA_Subsets)
 
-ArabicMMLU_subsets = ['Arabic Language (Middle School)', 'Civics (High School)', 'Social Science (Middle School)', 'Economics (High School)', 'History (High School)', 'Political Science (University)', 'Geography (High School)', 'Islamic Studies (High School)', 'Arabic Language (Primary School)', 'Natural Science (Primary School)', 'Philosophy (High School)', 'General Knowledge', 'Arabic Language (High School)', 'Economics (University)', 'Islamic Studies (Primary School)', 'Geography (Middle School)', 'Islamic Studies', 'Biology (High School)', 'Natural Science (Middle School)', 'Islamic Studies (Middle School)', 'Math (Primary School)', 'Computer Science (Primary School)', 'Computer Science (High School)', 'Social Science (Primary School)', 'Arabic Language (Grammar)', 'Physics (High School)', 'History (Primary School)', 'Driving Test', 'Civics (Middle School)', 'History (Middle School)', 'General Knowledge (Middle School)', 'General Knowledge (Primary School)', 'Geography (Primary School)', 'Law (Professional)', 'Computer Science (University)', 'Accounting (University)', 'Economics (Middle School)', 'Management (University)', 'Computer Science (Middle School)', 'Arabic Language (General)']
-ArabicMMLU_Tasks = construct_tasks_from_subsets("qimma/MCQ_ArabicMMLU","ArabicMMLU", ArabicMMLU_subsets)
+ArabicMMLU_Subsets = ['Arabic Language (Middle School)', 'Civics (High School)', 'Social Science (Middle School)', 'Economics (High School)', 'History (High School)', 'Political Science (University)', 'Geography (High School)', 'Islamic Studies (High School)', 'Arabic Language (Primary School)', 'Natural Science (Primary School)', 'Philosophy (High School)', 'General Knowledge', 'Arabic Language (High School)', 'Economics (University)', 'Islamic Studies (Primary School)', 'Geography (Middle School)', 'Islamic Studies', 'Biology (High School)', 'Natural Science (Middle School)', 'Islamic Studies (Middle School)', 'Math (Primary School)', 'Computer Science (Primary School)', 'Computer Science (High School)', 'Social Science (Primary School)', 'Arabic Language (Grammar)', 'Physics (High School)', 'History (Primary School)', 'Driving Test', 'Civics (Middle School)', 'History (Middle School)', 'General Knowledge (Middle School)', 'General Knowledge (Primary School)', 'Geography (Primary School)', 'Law (Professional)', 'Computer Science (University)', 'Accounting (University)', 'Economics (Middle School)', 'Management (University)', 'Computer Science (Middle School)', 'Arabic Language (General)']
+ArabicMMLU_Tasks = construct_tasks_from_subsets("qimma/MCQ_ArabicMMLU","ArabicMMLU", ArabicMMLU_Subsets)
 
 
-PalmX_Subset = ['culture', 'islamic']
-PalmX_Tasks = construct_tasks_from_subsets("qimma/MCQ_PalmX", "PalmX", PalmX_Subset)
+PalmX_Subsets = ['culture', 'islamic']
+PalmX_Tasks = construct_tasks_from_subsets("qimma/MCQ_PalmX", "PalmX", PalmX_Subsets)
 
+MedAraBench_Subset = ['Anatomy', 'Histology', 'Histology and Anatomy', 'Histology and Systemic Anatomy', 'Anesthesia', 'Biochemistry', 'Cell Biology', 'Genetics', 'Physics', 'Chemistry', 'Embryology', 'Emergency Medicine', 'Gastroenterology', 'Neurology', 'Cardiology', 'Thorasic Internal', 'Oncology', 'Chest Diseases', 'Gastroenterology & Hepatology', 'Microbiology', 'Ophthalmology', 'Pathology', 'Pharmacology', 'Physiology', 'Statistics', 'Surgery']
+MedAraBench_Tasks = construct_tasks_from_subsets("qimma/MCQ_MedAraBench", "MedAraBench", MedAraBench_Subset )
+
+GAT_Subsets =  ['analogy', 'arithmetic', 'association', 'completion', 'reading', 'algebra', 'comparisons', 'contextual', 'geometry']
+GAT_Tasks = construct_tasks_from_subsets("qimma/MCQ_GAT", "GAT", GAT_Subsets)
 
 #######################
 # QA TASKS
@@ -181,6 +186,8 @@ QIMMA_MCQ_TASKS = (
     + SyntheticQA_Tasks
     + ArabicMMLU_Tasks
     + PalmX_Tasks
+    + GAT_Tasks
+    + MedAraBench_Tasks
 )
 
 QIMMA_QA_TASKS = (
