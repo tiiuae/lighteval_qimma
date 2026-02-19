@@ -22,6 +22,43 @@ qimma-MedArabiQ:mcq_bias
 qimma-MedArabiQ:mcq_knowledge
 qimma-PalmX:culture
 qimma-PalmX:islamic
+qimma-MedAraBench:Anesthesia
+qimma-MedAraBench:Biochemistry
+qimma-MedAraBench:Cardiology
+qimma-MedAraBench:Cell Biology
+qimma-MedAraBench:Chemistry
+qimma-MedAraBench:Chest Diseases
+qimma-MedAraBench:Embryology
+qimma-MedAraBench:Emergency Medicine
+qimma-MedAraBench:Gastroenterology & Hepatology
+qimma-MedAraBench:Gastroenterology
+qimma-MedAraBench:Genetics
+qimma-MedAraBench:Histology and Anatomy
+qimma-MedAraBench:Histology and Systemic Anatomy
+qimma-MedAraBench:Histology
+qimma-MedAraBench:Microbiology
+qimma-MedAraBench:Neurology
+qimma-MedAraBench:Oncology
+qimma-MedAraBench:Ophthalmology
+qimma-MedAraBench:Pathology
+qimma-MedAraBench:Pharmacology
+qimma-MedAraBench:Physics
+qimma-MedAraBench:Physiology
+qimma-MedAraBench:Statistics
+qimma-MedAraBench:Surgery
+qimma-MedAraBench:Thorasic Internal
+qimma-GAT
+qimma-GAT:algebra
+qimma-GAT:analogy
+qimma-GAT:arithmetic
+qimma-GAT:association
+qimma-GAT:comparisons
+qimma-GAT:completion
+qimma-GAT:contextual
+qimma-GAT:geometry
+qimma-GAT:reading
+qimma-MedAraBench
+qimma-MedAraBench:Anatomy
 qimma-AraDiCE-Culture:Egypt
 qimma-AraDiCE-Culture:Jordan
 qimma-AraDiCE-Culture:Lebanon
