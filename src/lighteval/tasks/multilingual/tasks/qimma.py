@@ -90,7 +90,7 @@ def construct_tasks_from_subsets(hf_repo, benchmark, subsets):
     return [CustomQimmaNativeTask(name=f"qimma-{benchmark}:{subset}", hf_subset=subset, hf_repo=hf_repo) for subset in subsets]
 
 
-QIMMA_BENCHMARKS = ['AraTrust', 'NativeQA']
+QIMMA_BENCHMARKS = ['AraTrust']
 QIMMA_TASKS = [CustomQimmaNativeTask(name=f"qimma-{benchmark}", hf_subset="default", hf_repo=f"qimma/MCQ_{benchmark}") for benchmark in QIMMA_BENCHMARKS]
 
 mizan_task = CustomQimmaNativeTask(name=f"qimma-Mizan", hf_subset="default", hf_repo=f"qimma/MCQ_MizanQA", multi_select=True)
@@ -106,11 +106,11 @@ Arabculture_Tasks = construct_tasks_from_subsets("qimma/MCQ_ArabCulture","ArabCu
 MedArabiQ_Subsets = ['fib_with_choices', 'mcq_bias', 'mcq_knowledge']
 MedArabiQ_Tasks = construct_tasks_from_subsets("qimma/MCQ_MedArabiQ","MedArabiQ", MedArabiQ_Subsets)
 
-SyntheticQA_Subsets = ['Biology', 'Chemistry', 'General_Science', 'Math', 'Physics']
-SyntheticQA_Tasks = construct_tasks_from_subsets("qimma/MCQ_SyntheticQA", "SyntheticQA", SyntheticQA_Subsets)
-
 ArabicMMLU_Subsets = ['Arabic Language (Middle School)', 'Civics (High School)', 'Social Science (Middle School)', 'Economics (High School)', 'History (High School)', 'Political Science (University)', 'Geography (High School)', 'Islamic Studies (High School)', 'Arabic Language (Primary School)', 'Natural Science (Primary School)', 'Philosophy (High School)', 'General Knowledge', 'Arabic Language (High School)', 'Economics (University)', 'Islamic Studies (Primary School)', 'Geography (Middle School)', 'Islamic Studies', 'Biology (High School)', 'Natural Science (Middle School)', 'Islamic Studies (Middle School)', 'Math (Primary School)', 'Computer Science (Primary School)', 'Computer Science (High School)', 'Social Science (Primary School)', 'Arabic Language (Grammar)', 'Physics (High School)', 'History (Primary School)', 'Driving Test', 'Civics (Middle School)', 'History (Middle School)', 'General Knowledge (Middle School)', 'General Knowledge (Primary School)', 'Geography (Primary School)', 'Law (Professional)', 'Computer Science (University)', 'Accounting (University)', 'Economics (Middle School)', 'Management (University)', 'Computer Science (Middle School)', 'Arabic Language (General)']
 ArabicMMLU_Tasks = construct_tasks_from_subsets("qimma/MCQ_ArabicMMLU","ArabicMMLU", ArabicMMLU_Subsets)
+
+STEM_3LM_Subsets = ['nat-chemistry', 'nat-physics', 'nat-biology', 'nat-math', 'nat-geography', 'syn-biology', 'syn-chemistry', 'syn-general_science', 'syn-math', 'syn-physics']
+STEM_3LM_Tasks = construct_tasks_from_subsets("qimma/MCQ_3LM-STEM","3lmSTEM", STEM_3LM_Subsets)
 
 
 PalmX_Subsets = ['culture', 'islamic']
@@ -183,11 +183,11 @@ QIMMA_MCQ_TASKS = (
     + AraDiCE_Tasks
     + Arabculture_Tasks
     + MedArabiQ_Tasks
-    + SyntheticQA_Tasks
     + ArabicMMLU_Tasks
     + PalmX_Tasks
     + GAT_Tasks
     + MedAraBench_Tasks
+    + STEM_3LM_Tasks
 )
 
 QIMMA_QA_TASKS = (
