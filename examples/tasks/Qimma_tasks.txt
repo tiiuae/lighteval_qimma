@@ -69,6 +69,43 @@ qimma-ArablegalEval-QA
 qimma-MedArabicQ-QA:fib_no_choices
 qimma-MedArabicQ-QA:qa_with_llm_mods
 qimma-Mizan
+qimma-GAT
+qimma-GAT:algebra
+qimma-GAT:analogy
+qimma-GAT:arithmetic
+qimma-GAT:association
+qimma-GAT:comparisons
+qimma-GAT:completion
+qimma-GAT:contextual
+qimma-GAT:geometry
+qimma-GAT:reading
+qimma-MedAraBench
+qimma-MedAraBench:AnatomyExpand commentComment on line L89Resolved
+qimma-MedAraBench:Anesthesia
+qimma-MedAraBench:Biochemistry
+qimma-MedAraBench:Cardiology
+qimma-MedAraBench:Cell Biology
+qimma-MedAraBench:Chemistry
+qimma-MedAraBench:Chest Diseases
+qimma-MedAraBench:Embryology
+qimma-MedAraBench:Emergency Medicine
+qimma-MedAraBench:Gastroenterology & Hepatology
+qimma-MedAraBench:Gastroenterology
+qimma-MedAraBench:Genetics
+qimma-MedAraBench:Histology and Anatomy
+qimma-MedAraBench:Histology and Systemic Anatomy
+qimma-MedAraBench:Histology
+qimma-MedAraBench:Microbiology
+qimma-MedAraBench:Neurology
+qimma-MedAraBench:Oncology
+qimma-MedAraBench:Ophthalmology
+qimma-MedAraBench:Pathology
+qimma-MedAraBench:Pharmacology
+qimma-MedAraBench:Physics
+qimma-MedAraBench:Physiology
+qimma-MedAraBench:Statistics
+qimma-MedAraBench:Surgery
+qimma-MedAraBench:Thorasic Internal
 qimma-3lmSTEM:nat-chemistry
 qimma-3lmSTEM:nat-physics
 qimma-3lmSTEM:nat-biology
