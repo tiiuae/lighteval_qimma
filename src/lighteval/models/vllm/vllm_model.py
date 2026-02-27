@@ -291,7 +291,7 @@ class VLLMModel(LightevalModel):
         # Inferring from the tokenizer will cause vllm to bug for models with mismatches between model
         # config and tk config, like mistralai/Mistral-7B-v0.1
         if self._max_length is None:
-            self._max_length = model.llm_engine.model_config.max_seq_len_to_capture
+            self._max_length = model.llm_engine.model_config.max_model_len
 
         return model
 
@@ -455,7 +455,8 @@ class VLLMModel(LightevalModel):
             ]
         else:
             outputs = self.model.generate(
-                prompt_token_ids=inputs,
+                # prompt_token_ids=inputs,
+                prompts=inputs,
                 sampling_params=sampling_params,
                 use_tqdm=True,
             )

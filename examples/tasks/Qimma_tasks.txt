@@ -80,7 +80,7 @@ qimma-GAT:contextual
 qimma-GAT:geometry
 qimma-GAT:reading
 qimma-MedAraBench
-qimma-MedAraBench:AnatomyExpand
+qimma-MedAraBench:Anatomy
 qimma-MedAraBench:Anesthesia
 qimma-MedAraBench:Biochemistry
 qimma-MedAraBench:Cardiology
