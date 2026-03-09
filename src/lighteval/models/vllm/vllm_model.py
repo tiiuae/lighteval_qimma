@@ -180,6 +180,7 @@ class VLLMModelConfig(ModelConfig):
     subfolder: str | None = None
     is_async: bool = False  # Whether to use the async version or sync version of the model
     override_chat_template: bool = None
+    language_model_only: bool = None  # whether to load the model as a language model only, which can speed up inference for decoder-only models when using vllm
 
 
 @requires("vllm")
@@ -218,6 +219,7 @@ class VLLMModel(LightevalModel):
 
         # Initialize cache for tokenization and predictions
         self._cache = SampleCache(config)
+        self.language_model_only = config.language_model_only
 
     @property
     def tokenizer(self):
@@ -264,6 +266,7 @@ class VLLMModel(LightevalModel):
             "max_num_seqs": int(config.max_num_seqs),
             "max_num_batched_tokens": int(config.max_num_batched_tokens),
             "enforce_eager": True,
+            "language_model_only": config.language_model_only,
         }
 
         if config.quantization is not None:
