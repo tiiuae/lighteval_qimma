@@ -180,6 +180,7 @@ class VLLMModelConfig(ModelConfig):
     subfolder: str | None = None
     is_async: bool = False  # Whether to use the async version or sync version of the model
     override_chat_template: bool = None
+    enforce_eager: bool = None  # Whether to enforce eager mode in vLLM, which can reduce memory usage and improve stability for some models, at the cost of some performance. We enable it by default since it seems to be required for some models like Mistral 7B with vLLM 0.17.0, but it can be disabled for better performance if the user knows their model works well without it.
     language_model_only: bool = None  # whether to load the model as a language model only, which can speed up inference for decoder-only models when using vllm
 
 
@@ -219,6 +220,7 @@ class VLLMModel(LightevalModel):
 
         # Initialize cache for tokenization and predictions
         self._cache = SampleCache(config)
+        self.enforce_eager = config.enforce_eager 
         self.language_model_only = config.language_model_only
 
     @property
@@ -265,7 +267,7 @@ class VLLMModel(LightevalModel):
             "seed": int(config.seed),
             "max_num_seqs": int(config.max_num_seqs),
             "max_num_batched_tokens": int(config.max_num_batched_tokens),
-            "enforce_eager": True,
+            "enforce_eager": config.enforce_eager,
             "language_model_only": config.language_model_only,
         }
 
