@@ -133,6 +133,7 @@ class PromptManager:
                 messages,
                 tokenize=False,
                 add_generation_prompt=True,
+                enable_thinking=False,
             )
 
         else:  # for apis
