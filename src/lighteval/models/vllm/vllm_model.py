@@ -351,7 +351,7 @@ class VLLMModel(LightevalModel):
             max_new_tokens = self.config.generation_parameters.max_new_tokens or split[0].generation_size
             num_samples = split[0].num_samples
 
-            context = [self.prompt_manager.prepare_prompt(doc) for doc in split]
+            context = [self.prompt_manager.prepare_prompt(doc, disable_thinking=False) for doc in split]
             tokenized = self.tokenizer(context, add_special_tokens=self.add_special_tokens)
 
             # The main question for this step is the following:
@@ -480,7 +480,7 @@ class VLLMModel(LightevalModel):
         res = []
 
         for split in tqdm(dataset.splits_iterator()):
-            contexts = [self.prompt_manager.prepare_prompt(doc) for doc in split]
+            contexts = [self.prompt_manager.prepare_prompt(doc, disable_thinking=True) for doc in split]
 
             inputs = []
             tokenized_continuations_batch = []
