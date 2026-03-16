@@ -45,14 +45,14 @@ class PromptManager:
         self.tokenizer = tokenizer
         self.system_prompt = system_prompt  # System prompt to be used in chat templates
 
-    def prepare_prompt(self, doc: Doc) -> str:
+    def prepare_prompt(self, doc: Doc, disable_thinking=False) -> str:
         """Prepare a prompt from a document, either using chat template or plain text format.
 
         Returns:
             str: The formatted prompt string
         """
         if self.use_chat_template:
-            return self._prepare_chat_template(doc)
+            return self._prepare_chat_template(doc, disable_thinking=disable_thinking)
         else:
             return self._prepare_plain_text(doc)
 
@@ -94,7 +94,7 @@ class PromptManager:
         """
         return self._prepare_chat_template(doc, tokenize=False)
 
-    def _prepare_chat_template(self, doc: Doc, tokenize: bool = True) -> str:
+    def _prepare_chat_template(self, doc: Doc, tokenize: bool = True, disable_thinking: bool = False) -> str:
         """Prepare prompt using chat template format.
 
         Returns:
@@ -128,12 +128,20 @@ class PromptManager:
 
         if tokenize:  # for local models
             assert self.tokenizer is not None, "Tokenizer must be set for chat template formatting."
-
-            return self.tokenizer.apply_chat_template(
-                messages,
-                tokenize=False,
-                add_generation_prompt=True,
-            )
+            
+            if disable_thinking:
+                return self.tokenizer.apply_chat_template(
+                    messages,
+                    tokenize=False,
+                    add_generation_prompt=True,
+                    enable_thinking=False,
+                )
+            else:
+                return self.tokenizer.apply_chat_template(
+                    messages,
+                    tokenize=False,
+                    add_generation_prompt=True
+                )
 
         else:  # for apis
             return messages
